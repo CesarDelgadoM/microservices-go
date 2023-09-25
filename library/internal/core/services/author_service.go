@@ -1,8 +1,8 @@
 package services
 
 import (
+	"github.com/CesarDelgadoM/microservices-go/library/internal/core/domain/entities"
 	"github.com/CesarDelgadoM/microservices-go/library/internal/core/ports"
-	"github.com/gin-gonic/gin"
 )
 
 // Application / Business Component
@@ -16,10 +16,12 @@ func NewAuthorService(authorRepository ports.AuthorRepository) ports.AuthorServi
 	}
 }
 
-func (as AuthorService) FindAuthor(ctx *gin.Context) {
-
+func (as AuthorService) FindAuthor(id uint) (entities.Author, error) {
+	as.authorRepository.FindById(id)
+	return entities.Author{}, nil
 }
 
-func (as AuthorService) InsertAuthor(ctx *gin.Context) {
-
+func (as AuthorService) CreateAuthor(author *entities.Author) error {
+	as.authorRepository.Create(author)
+	return nil
 }

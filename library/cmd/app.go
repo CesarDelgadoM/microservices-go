@@ -5,7 +5,7 @@ import (
 
 	"github.com/CesarDelgadoM/microservices-go/library/config"
 	"github.com/CesarDelgadoM/microservices-go/library/internal/adapters/repositories"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/server"
+	"github.com/CesarDelgadoM/microservices-go/library/server"
 	"github.com/gin-gonic/gin"
 )
 

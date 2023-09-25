@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/CesarDelgadoM/microservices-go/library/internal/adapters/controllers"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/adapters/handlers"
 	"github.com/CesarDelgadoM/microservices-go/library/internal/adapters/repositories"
 	"github.com/CesarDelgadoM/microservices-go/library/internal/core/ports"
 	"github.com/CesarDelgadoM/microservices-go/library/internal/core/services"
@@ -28,7 +28,7 @@ func (server Server) Start(addr string) error {
 	authorService := services.NewAuthorService(authorRepository)
 
 	// init controllers
-	controllers := controllers.NewAuthorController(authorService, server.engine)
+	controllers := handlers.NewAuthorController(authorService, server.engine)
 
 	// init routes
 	controllers.InitAuthorRouters()

@@ -16,8 +16,8 @@ func NewAuthorRepository(db ports.Database) ports.AuthorRepository {
 	}
 }
 
-func (ar AuthorRepository) FindById(id uint) entities.Author {
-	return entities.Author{}
+func (ar AuthorRepository) FindById(id uint) (entities.Author, error) {
+	return entities.Author{}, nil
 }
 
 func (ar AuthorRepository) Create(author *entities.Author) error {
