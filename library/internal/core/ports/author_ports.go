@@ -5,13 +5,13 @@ import (
 )
 
 // Primary Port / Driver Port
-type AuthorService interface {
+type IAuthorService interface {
 	FindAuthor(id uint) (entities.Author, error)
 	CreateAuthor(author *entities.Author) error
 }
 
 // Secondary Port / Driven Port
-type AuthorRepository interface {
+type IAuthorRepository interface {
 	FindById(id uint) (entities.Author, error)
 	Create(author *entities.Author) error
 }

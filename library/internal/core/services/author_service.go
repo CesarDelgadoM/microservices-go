@@ -7,10 +7,10 @@ import (
 
 // Application / Business Component
 type AuthorService struct {
-	authorRepository ports.AuthorRepository
+	authorRepository ports.IAuthorRepository
 }
 
-func NewAuthorService(authorRepository ports.AuthorRepository) ports.AuthorService {
+func NewAuthorService(authorRepository ports.IAuthorRepository) ports.IAuthorService {
 	return AuthorService{
 		authorRepository: authorRepository,
 	}
@@ -22,6 +22,5 @@ func (as AuthorService) FindAuthor(id uint) (entities.Author, error) {
 }
 
 func (as AuthorService) CreateAuthor(author *entities.Author) error {
-	as.authorRepository.Create(author)
-	return nil
+	return as.authorRepository.Create(author)
 }

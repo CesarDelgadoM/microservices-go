@@ -1,9 +1,10 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/domain"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/core/common"
 	"github.com/CesarDelgadoM/microservices-go/library/internal/core/domain/entities"
 	"github.com/CesarDelgadoM/microservices-go/library/internal/core/ports"
 	"github.com/gin-gonic/gin"
@@ -11,11 +12,11 @@ import (
 
 // Primary Adapter
 type AuthorHandler struct {
-	authorService ports.AuthorService
+	authorService ports.IAuthorService
 	engine        *gin.Engine
 }
 
-func NewAuthorController(authorService ports.AuthorService, engine *gin.Engine) AuthorHandler {
+func NewAuthorController(authorService ports.IAuthorService, engine *gin.Engine) AuthorHandler {
 	return AuthorHandler{
 		authorService: authorService,
 		engine:        engine,
@@ -36,19 +37,20 @@ func (ah AuthorHandler) FindAuthor(ctx *gin.Context) {
 func (ah AuthorHandler) CreateAuthor(ctx *gin.Context) {
 	var author entities.Author
 
-	if err := ctx.BindJSON(&author); err != nil {
+	if err := ctx.ShouldBindJSON(&author); err != nil {
 		ctx.JSON(http.StatusBadRequest,
-			domain.ResponseError(err.Error(), http.StatusBadRequest))
+			common.ResponseError(err.Error(), http.StatusBadRequest))
 		return
 	}
+	fmt.Println(author)
 
 	err := ah.authorService.CreateAuthor(&author)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError,
-			domain.ResponseError(err.Error(), http.StatusInternalServerError))
+			common.ResponseError(err.Error(), http.StatusInternalServerError))
 		return
 	}
 
-	ctx.JSON(http.StatusOK, domain.ResponseData(author, "Author created",
+	ctx.JSON(http.StatusOK, common.ResponseData(author, "Author created",
 		http.StatusOK))
 }

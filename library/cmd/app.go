@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/CesarDelgadoM/microservices-go/library/config"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/adapters/repositories"
+	"github.com/CesarDelgadoM/microservices-go/library/database"
 	"github.com/CesarDelgadoM/microservices-go/library/server"
 	"github.com/gin-gonic/gin"
 )
@@ -15,7 +15,7 @@ func main() {
 		log.Fatal("cannot load config file:", err)
 	}
 
-	db := repositories.ConnectPostgres(&config)
+	db := database.ConnectPostgres(&config)
 
 	engine := gin.Default()
 
