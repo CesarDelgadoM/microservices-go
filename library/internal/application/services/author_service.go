@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/domain/entities"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/ports"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/application/ports"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/domain"
 )
 
 // Application / Business Component
@@ -16,11 +16,11 @@ func NewAuthorService(authorRepository ports.IAuthorRepository) ports.IAuthorSer
 	}
 }
 
-func (as AuthorService) FindAuthor(id uint) (entities.Author, error) {
+func (as AuthorService) FindAuthor(id uint) (domain.Author, error) {
 	as.authorRepository.FindById(id)
-	return entities.Author{}, nil
+	return domain.Author{}, nil
 }
 
-func (as AuthorService) CreateAuthor(author *entities.Author) error {
+func (as AuthorService) CreateAuthor(author *domain.Author) error {
 	return as.authorRepository.Create(author)
 }

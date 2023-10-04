@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/common"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/domain/entities"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/ports"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/application/ports"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/common"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/domain"
 	"github.com/gin-gonic/gin"
 )
 
@@ -35,7 +35,7 @@ func (ah AuthorHandler) FindAuthor(ctx *gin.Context) {
 }
 
 func (ah AuthorHandler) CreateAuthor(ctx *gin.Context) {
-	var author entities.Author
+	var author domain.Author
 
 	if err := ctx.ShouldBindJSON(&author); err != nil {
 		ctx.JSON(http.StatusBadRequest,

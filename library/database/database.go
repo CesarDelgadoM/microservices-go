@@ -5,7 +5,8 @@ import (
 	"log"
 
 	"github.com/CesarDelgadoM/microservices-go/library/config"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/domain/entities"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/domain"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -27,7 +28,7 @@ func ConnectPostgres(config *config.PostgresConfig) IDatabase {
 		log.Fatal("Failed to connect to the postgres database")
 	}
 
-	db.AutoMigrate(&entities.Author{}, &entities.Book{})
+	db.AutoMigrate(&domain.Author{}, &domain.Book{})
 	log.Println("Database migration complete")
 
 	log.Println("Connected successfully to the postgres database")

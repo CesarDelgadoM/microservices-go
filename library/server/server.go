@@ -2,9 +2,10 @@ package server
 
 import (
 	"github.com/CesarDelgadoM/microservices-go/library/database"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/adapters/handlers"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/adapters/repositories"
-	"github.com/CesarDelgadoM/microservices-go/library/internal/core/services"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/application/services"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/infrastructure/handlers"
+	"github.com/CesarDelgadoM/microservices-go/library/internal/infrastructure/repositories"
+
 	"github.com/gin-gonic/gin"
 )
 
